@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body align="center">
+    <h1 style="margin-top: 20px;">Predict Sentiment Analysis</h1>
+    <div style="margin-top: 60px;">
+        <input id="sentence" type="text" style="padding: 9px;" placeholder="Enter Text"/>
+        <button onclick="Predict()" type="button" style="padding: 9px;">
+            Predict
+        </button>
+    </div>
+    <div style="margin-top: 60px;">
+        <h1>Prediction</h1>
+        <table align="center" style="margin-top: 20px;" border="2">
+            <tbody>
+                <tr>
+                    <td style="width:200px">Sentence</td>
+                    <td id="sentence_result" style="width:600px"></td>
+                </tr>
+                <tr>
+                    <td style="width:200px">Is Sarcastic</td>
+                    <td id="sarcastic_result" style="width:600px"></td>
+                </tr>
+                <tr>
+                    <td style="width:200px">Confidence</td>
+                    <td id="confidence_result" style="width:600px"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+const Predict = async () => {
+    let sentence = document.getElementById("sentence").value;
+    try {
+        const res = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ sentence })
+        });
+
+        if (!res.ok) {
+            throw new Error("Failed to fetch prediction");
+        }
+
+        const data = await res.json();
+        console.log(data);
+
+        // Update the table with the results
+        document.getElementById("sentence_result").textContent = data.sentence || "N/A";
+        document.getElementById("sarcastic_result").textContent = data.prediction || "N/A";
+        document.getElementById("confidence_result").textContent = data.confidence 
+            ? `${(data.confidence * 100).toFixed(2)}%` 
+            : "N/A";
+
+    } catch (error) {
+        console.error(error);
+        alert("Error fetching prediction. Please check the console for more details.");
+    }
+}
+</script>
+</html>

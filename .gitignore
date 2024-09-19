@@ -1,0 +1,53 @@
+# Python related (backend)
+backend/*.pyc
+backend/*.pyo
+backend/__pycache__/
+backend/*.log
+
+# Environment folders (backend)
+backend/.env/
+backend/venv/
+backend/env/
+backend/*.env
+
+
+# TensorFlow Checkpoints and Model Files (backend)
+backend/checkpoint/
+backend/saved_model/
+backend/*.h5
+backend/*.hdf5
+backend/*.pb
+backend/*.ckpt
+
+# Logs and Temporary Files (backend)
+backend/*.log
+backend/*.tmp
+backend/*.temp
+
+# Vercel related (backend)
+backend/.vercel/
+
+# Node-related (frontend)
+frontend/node_modules/
+frontend/npm-debug.log*
+frontend/yarn-error.log
+frontend/.next/
+frontend/out/
+
+# Build outputs (frontend)
+frontend/build/
+frontend/dist/
+frontend/.nuxt/
+frontend/.cache/
+
+# Environment files (frontend)
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# System-specific files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
